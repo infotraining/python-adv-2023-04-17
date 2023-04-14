@@ -1,2 +1,7 @@
-# python-adv-2023-04-17
-Szkolenie - Zaawansowane programowanie w Pythonie
+# Szkolenie - Zaawansowane programowanie w Pythonie
+
+## Materiały
+* https://infotraining.bitbucket.io/python-adv/
+
+## Wymagania
+* Python 3.10+
