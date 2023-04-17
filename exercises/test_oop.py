@@ -5,9 +5,17 @@ import pytest
 class Vector:
     
     def __init__(self, x: float, y: float) -> None:
-        self.x = x
-        self.y = y
+        self.__x = x
+        self.__y = y
     
+    @property
+    def x(self) -> float:
+        return self.__x
+    
+    @property
+    def y(self) -> float:
+        return self.__y
+
     def __add__(self, other: 'Vector') -> 'Vector':
         return Vector(self.x + other.x, self.y + other.y)
 
@@ -32,6 +40,7 @@ class Vector:
     def __hash__(self):
         return hash(tuple(self))
 
+    @property
     def angle(self) -> float:
         return math.atan2(self.y, self.x)
 
@@ -92,7 +101,7 @@ def test_Vector_iterator():
 ])
 def test_Vector_angle(x, y, angle):
     v = Vector(x, y)
-    assert v.angle() == pytest.approx(angle, 0.0001)
+    assert v.angle == pytest.approx(angle, 0.0001)
 
 
 def test_Vector_hashing():
