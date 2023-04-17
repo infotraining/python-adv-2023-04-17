@@ -3,7 +3,43 @@ import pytest
 
 
 class Vector:
-    """TODO"""
+    
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
+    
+    def __add__(self, other: 'Vector') -> 'Vector':
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y})"
+    
+    def __eq__(self, other: 'Vector') -> bool:
+        return (self.x, self.y) == (other.x, other.y)
+
+    def __abs__(self) -> float:
+        return math.hypot(self.x, self.y)
+    
+    def __mul__(self, arg: float) -> 'Vector':
+        return Vector(self.x*arg, self.y*arg)
+
+    def __bool__(self) -> bool:
+        return bool(self.x or self.y)
+
+    def __iter__(self):
+        return (i for i in (self.x, self.y))
+    
+    def __hash__(self):
+        return hash(tuple(self))
+
+    def angle(self) -> float:
+        return math.atan2(self.y, self.x)
+
+
+def test_Vector_init():
+    v = Vector(1, 2)
+    assert v.x == 1
+    assert v.y == 2
 
 
 def test_Vector_addition():
