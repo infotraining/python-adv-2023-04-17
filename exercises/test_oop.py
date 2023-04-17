@@ -3,6 +3,7 @@ import pytest
 
 
 class Vector:
+    __slots__ = ['__x', '__y']
     
     def __init__(self, x: float, y: float) -> None:
         self.__x = x
