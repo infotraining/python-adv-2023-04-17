@@ -5,3 +5,6 @@
 
 ## Wymagania
 * Python 3.10+
+
+## CodeShare
+* https://codeshare.io/VZ7g6z
