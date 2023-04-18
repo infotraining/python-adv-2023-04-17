@@ -1,30 +1,15 @@
 import math
 import pytest
+from dataclasses import dataclass
+import dataclasses
 
-
+@dataclass(frozen=True, unsafe_hash=True)
 class Vector:
-    __slots__ = ['__x', '__y']
-
-    def __init__(self, x: float, y: float) -> None:
-        self.__x = x
-        self.__y = y
-    
-    @property
-    def x(self) -> float:
-        return self.__x
-    
-    @property
-    def y(self) -> float:
-        return self.__y
+    x: float
+    y: float
 
     def __add__(self, other: 'Vector') -> 'Vector':
-        return Vector(self.x + other.x, self.y + other.y)
-
-    def __repr__(self):
-        return f"Vector({self.x}, {self.y})"
-    
-    def __eq__(self, other: 'Vector') -> bool:
-        return (self.x, self.y) == (other.x, other.y)
+        return Vector(self.x + other.x, self.y + other.y)    
 
     def __abs__(self) -> float:
         return math.hypot(self.x, self.y)
@@ -38,9 +23,6 @@ class Vector:
     def __iter__(self):
         return (i for i in (self.x, self.y))
     
-    def __hash__(self):
-        return hash(tuple(self))
-
     @property
     def angle(self) -> float:
         return math.atan2(self.y, self.x)

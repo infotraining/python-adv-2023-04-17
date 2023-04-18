@@ -1,11 +1,24 @@
 
 import pytest
 
-
 class PositiveValue:
-    """TODO - write a data descriptor"""
+    def __set__(self, obj, value):
+        if value > 0:
+            setattr(obj, self.private_name, value)
+        else:
+            raise AttributeError("Attribute validation failed")
+    
+    def __get__(self, obj, objtype=None):
+        return getattr(obj, self.private_name) 
+
+    def __set_name__(self, owner, name: str):        
+        self.private_name = f'_{owner.__name__}__{name}'
+
 
 class Person:
+    age = PositiveValue()
+    height = PositiveValue()
+
     def __init__(self, name: str, age: int, height: int) -> None:
         self.name = name
         self.age = age
