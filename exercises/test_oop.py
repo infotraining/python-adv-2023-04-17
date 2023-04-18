@@ -4,7 +4,7 @@ import pytest
 
 class Vector:
     __slots__ = ['__x', '__y']
-    
+
     def __init__(self, x: float, y: float) -> None:
         self.__x = x
         self.__y = y
@@ -44,6 +44,7 @@ class Vector:
     @property
     def angle(self) -> float:
         return math.atan2(self.y, self.x)
+
 
 
 def test_Vector_init():
