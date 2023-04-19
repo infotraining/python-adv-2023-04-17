@@ -1,9 +1,29 @@
 from functools import wraps
 from typing import Callable, TypeVar
 
-# TODO - nullable
+def nullable(func):
+    @wraps(func)
+    def wrapper(*args):
+        if any(arg is None for arg in args):
+            return None
+        return func(*args)
 
-#@nullable
+    return wrapper
+
+
+def bad_char_remove(*chars):
+    def wrapper(func):
+        @wraps(func)
+        def wrappie(text):
+            for c in chars:
+                text = text.replace(c, "")
+            return func(text)
+
+        return wrappie
+
+    return wrapper
+
+@nullable
 def square(x: float) -> float:
     return x * x
 
@@ -14,9 +34,8 @@ def test_nullable():
 
 #########################################################
 
-# TODO - bad_char_remove
 
-#@bad_char_remove("$", ",")
+@bad_char_remove("$", ",")
 def currency_to_float(text: str) -> float:
     return float(text)
 
